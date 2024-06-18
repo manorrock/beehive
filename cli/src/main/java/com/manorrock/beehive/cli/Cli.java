@@ -42,5 +42,8 @@ public class Cli {
      * @param arguments the command-line arguments. 
      */
     public static void main(String[] arguments) {
+        if (arguments.length >0 && arguments[0].equals("run")) {
+            System.out.println("Run!");
+        }
     }
 }
