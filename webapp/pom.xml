@@ -8,10 +8,10 @@
         <version>24.6.0-SNAPSHOT</version>
     </parent>
     <groupId>com.manorrock.beehive</groupId>
-    <artifactId>beehive-server</artifactId>
+    <artifactId>beehive-webapp</artifactId>
     <version>24.6.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Manorrock Beehive - Server</name>
+    <name>Manorrock Beehive - Webapp</name>
     
     <properties>
         <!-- dependencies -->
