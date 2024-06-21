@@ -44,6 +44,8 @@ public class Cli {
     public static void main(String[] arguments) {
         if (arguments.length >0 && arguments[0].equals("run")) {
             System.out.println("Run!");
+        } else if (arguments.length >0 && arguments[0].equals("build")) {
+            System.out.println("Build:)");
         }
     }
 }
