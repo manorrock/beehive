@@ -46,6 +46,8 @@ public class Cli {
             System.out.println("Run!");
         } else if (arguments.length >0 && arguments[0].equals("build")) {
             System.out.println("Build:)");
+        } else if (arguments.length >0 && arguments[0].equals("deploy")) {
+            System.out.println("Deploy;)");
         }
     }
 }
