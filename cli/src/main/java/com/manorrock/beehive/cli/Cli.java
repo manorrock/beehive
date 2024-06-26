@@ -57,6 +57,8 @@ public class Cli implements Callable<Integer> {
             System.out.println("Build:)");
         } else if (arguments.length > 0 && arguments[0].equals("deploy")) {
             System.out.println("Deploy;)");
+        } else if (arguments.length > 0 && arguments[0].equals("undeploy")) {
+            System.out.println("Undeploy :(");
         }
     }
 }
