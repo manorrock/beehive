@@ -29,24 +29,33 @@
  */
 package com.manorrock.beehive.cli;
 
+import java.util.concurrent.Callable;
+import picocli.CommandLine;
+import picocli.CommandLine.Command;
+
 /**
  * The Beehive CLI.
- * 
+ *
  * @author Manfred Riem (mriem@manorrock.com)
  */
-public class Cli {
+@Command(name = "bee", mixinStandardHelpOptions = true,
+        subcommands = {
+            RunCommand.class
+        },
+        versionProvider = CliVersionProvider.class)
+public class Cli implements Callable<Integer> {
 
-    /**
-     * Main method.
-     * 
-     * @param arguments the command-line arguments. 
-     */
+    @Override
+    public Integer call() throws Exception {
+        return 0;
+    }
+
     public static void main(String[] arguments) {
-        if (arguments.length >0 && arguments[0].equals("run")) {
-            System.out.println("Run!");
-        } else if (arguments.length >0 && arguments[0].equals("build")) {
+        if (arguments.length > 0 && arguments[0].equals("run")) {
+            System.exit(new CommandLine(new Cli()).execute(arguments));
+        } else if (arguments.length > 0 && arguments[0].equals("build")) {
             System.out.println("Build:)");
-        } else if (arguments.length >0 && arguments[0].equals("deploy")) {
+        } else if (arguments.length > 0 && arguments[0].equals("deploy")) {
             System.out.println("Deploy;)");
         }
     }
