@@ -11,13 +11,16 @@
     <packaging>jar</packaging>
     <name>Manorrock Beehive - CLI</name>
     <properties>
+        <!-- dependencies -->
+        <picocli.version>4.7.6</picocli.version>
+        <!-- other -->
         <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>info.picocli</groupId>
             <artifactId>picocli</artifactId>
-            <version>4.7.6</version>
+            <version>${picocli.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
@@ -28,6 +31,17 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
+                    <!-- 
+                          This generates the correct files for use by
+                          GraalVM to integrate Picocli into a native image.
+                    -->
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>info.picocli</groupId>
+                            <artifactId>picocli-codegen</artifactId>
+                            <version>${picocli.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
@@ -63,4 +77,33 @@
             </plugin>            
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>graalvm</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.graalvm.buildtools</groupId>
+                        <artifactId>native-maven-plugin</artifactId>
+                        <version>0.10.2</version>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>compile-no-fork</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <skip>false</skip>
+                            <imageName>bo</imageName>
+                            <buildArgs>-H:+ReportExceptionStackTraces --no-fallback</buildArgs>
+                            <verbose>true</verbose>
+                        </configuration>
+                    </plugin>                    
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
