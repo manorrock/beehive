@@ -38,9 +38,12 @@ import picocli.CommandLine.Command;
  *
  * @author Manfred Riem (mriem@manorrock.com)
  */
-@Command(name = "bee", mixinStandardHelpOptions = true,
+@Command(name = "bo", mixinStandardHelpOptions = true,
         subcommands = {
-            RunCommand.class
+            BuildCommand.class,
+            DeployCommand.class,
+            RunCommand.class,
+            UndeployCommand.class
         },
         versionProvider = CliVersionProvider.class)
 public class Cli implements Callable<Integer> {
@@ -51,14 +54,6 @@ public class Cli implements Callable<Integer> {
     }
 
     public static void main(String[] arguments) {
-        if (arguments.length > 0 && arguments[0].equals("run")) {
-            System.exit(new CommandLine(new Cli()).execute(arguments));
-        } else if (arguments.length > 0 && arguments[0].equals("build")) {
-            System.out.println("Build:)");
-        } else if (arguments.length > 0 && arguments[0].equals("deploy")) {
-            System.out.println("Deploy;)");
-        } else if (arguments.length > 0 && arguments[0].equals("undeploy")) {
-            System.out.println("Undeploy :(");
-        }
+        System.exit(new CommandLine(new Cli()).execute(arguments));
     }
 }
