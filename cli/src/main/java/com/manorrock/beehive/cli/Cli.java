@@ -29,12 +29,11 @@
  */
 package com.manorrock.beehive.cli;
 
-import java.util.concurrent.Callable;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 /**
- * The Beehive CLI.
+ * This is the main entry point to the Beehive CLI.
  *
  * @author Manfred Riem (mriem@manorrock.com)
  */
@@ -46,13 +45,13 @@ import picocli.CommandLine.Command;
             UndeployCommand.class
         },
         versionProvider = CliVersionProvider.class)
-public class Cli implements Callable<Integer> {
+public class Cli {
 
-    @Override
-    public Integer call() throws Exception {
-        return 0;
-    }
-
+    /**
+     * Main method.
+     * 
+     * @param arguments the command-line arguments.
+     */
     public static void main(String[] arguments) {
         System.exit(new CommandLine(new Cli()).execute(arguments));
     }
