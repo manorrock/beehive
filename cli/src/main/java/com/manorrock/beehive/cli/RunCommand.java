@@ -98,9 +98,9 @@ public class RunCommand implements Callable<Integer> {
      */
     @Override
     public Integer call() throws Exception {
-        if (file == null) {
+        if (file == null && imageName == null) {
             imageName = new File("").getCanonicalFile().getName();
-        } else {
+        } else if (file != null) {
             imageName = file.get(0);
         }
         if (runtime != null) {
