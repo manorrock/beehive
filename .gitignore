@@ -1,3 +1,5 @@
 /cli/target/
 /server/target/
 /webapp/target/
+/cli/java/target/
+/cli/macos/target/
