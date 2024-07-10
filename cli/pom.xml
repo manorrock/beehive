@@ -98,7 +98,7 @@
                         <configuration>
                             <skip>false</skip>
                             <imageName>bo</imageName>
-                            <buildArgs>-H:+ReportExceptionStackTraces --no-fallback</buildArgs>
+                            <buildArgs>--allow-incomplete-classpath -H:+ReportExceptionStackTraces --no-fallback</buildArgs>
                             <verbose>true</verbose>
                         </configuration>
                     </plugin>                    
