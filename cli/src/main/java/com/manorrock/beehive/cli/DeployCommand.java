@@ -142,17 +142,6 @@ public class DeployCommand implements Callable<Integer> {
      */
     private int deployOnDocker(String imageName) throws Exception {
 
-        if (!skipBuild) {
-            DockerBuilder docker = new DockerBuilder();
-            docker.setImageName(imageName);
-            docker.setTimeout(timeout);
-            docker.setTimeoutUnit(timeoutUnit);
-            if (workingDirectory != null) {
-                docker.setWorkingDirectory(workingDirectory);
-            }
-            docker.build();
-        }
-
         System.out.println("[Deployer] Starting deployment of '" + imageName + "' image");
 
         ProcessBuilder builder = new ProcessBuilder();

@@ -30,8 +30,10 @@
 package com.manorrock.beehive.cli;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
@@ -105,19 +107,6 @@ public class BuildCommand implements Callable<Integer> {
     private File workingDirectory;
 
     /**
-     * Build the given image locally using Docker.
-     */
-    private int buildOnDocker() throws Exception {
-        DockerBuilder builder = new DockerBuilder();
-        builder.setImageName(imageName);
-        builder.setTimeout(timeout);
-        builder.setTimeoutUnit(timeoutUnit);
-        builder.setWorkingDirectory(workingDirectory);
-        builder.setVerbose(verbose);
-        return builder.build();
-    }
-
-    /**
      * Call the command.
      *
      * @return 0 when completed successfully.
@@ -130,15 +119,26 @@ public class BuildCommand implements Callable<Integer> {
         determineImageName();
         determineWorkingDirectory();
 
-        if (runtime != null) {
-            switch (runtime.toLowerCase()) {
-                case "docker":
-                    return buildOnDocker();
-                default:
-                    break;
-            }
+        ProcessBuilder builder = new ProcessBuilder();
+        ArrayList<String> processArguments = new ArrayList<>();
+        processArguments.add("sh");
+        processArguments.add(new File("/tmp/processbuilder.sh").getAbsolutePath());
+        processArguments.add("docker");
+        processArguments.add("build");
+        processArguments.add("-t");
+        processArguments.add(imageName);
+        processArguments.add("-f");
+        processArguments.add("Dockerfile");
+        processArguments.add(".");
+        if (verbose) {
+            builder = builder.inheritIO();
         }
-        return 0;
+        if (workingDirectory != null) {
+            builder = builder.directory(workingDirectory);
+        }
+        Process process = builder.command(processArguments).directory(new File(System.getProperty("user.home"))).inheritIO().start();
+        process.waitFor(timeout, TimeUnit.valueOf(timeoutUnit.toUpperCase()));
+        return process.exitValue();
     }
 
     /**
