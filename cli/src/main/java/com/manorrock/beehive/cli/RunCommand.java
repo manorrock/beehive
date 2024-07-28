@@ -45,8 +45,7 @@ import picocli.CommandLine.Parameters;
  *
  * <p>
  * This command will initiate a run either locally or remotely and echo the
- * output to the local terminal. It will use the build command to build if it
- * was not previously build.
+ * output to the local terminal.
  * </p>
  *
  * @author Manfred Riem (mriem@manorrock.com)
@@ -75,7 +74,7 @@ public class RunCommand implements Callable<Integer> {
     /**
      * Stores the runtime.
      */
-    @Option(names = "--runtime", description = "The execution runtime (e.g. Docker, Kubernetes).", defaultValue = "docker")
+    @Option(names = "--runtime", description = "The execution runtime (e.g. Docker, Local, Kubernetes).", defaultValue = "docker")
     private String runtime;
 
     /**
@@ -89,7 +88,7 @@ public class RunCommand implements Callable<Integer> {
      */
     @Option(names = "--timeout-unit", description = "The timeout unit (e.g. seconds, minutes, hours, days).")
     private String timeoutUnit = "seconds";
-    
+
     /**
      * Call the command.
      *
@@ -105,12 +104,21 @@ public class RunCommand implements Callable<Integer> {
         }
         if (runtime != null) {
             switch (runtime.toLowerCase()) {
+                case "local":
+                    return runLocal();
                 case "docker":
                     return runOnDocker(imageName);
                 default:
                     break;
             }
         }
+        return 0;
+    }
+
+    /**
+     * Run local.
+     */
+    private int runLocal() throws Exception {
         return 0;
     }
 
