@@ -12,6 +12,6 @@
     </properties>
     <modules>
         <module>cli</module>
-        <module>webapp</module>
+        <module>rest</module>
     </modules>
 </project>
