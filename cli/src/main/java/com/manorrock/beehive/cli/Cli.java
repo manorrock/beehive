@@ -42,7 +42,10 @@ import picocli.CommandLine.Command;
             BuildCommand.class,
             DeployCommand.class,
             RunCommand.class,
-            UndeployCommand.class
+            UndeployCommand.class,
+            com.manorrock.beehive.cli.gradle.GradleCommand.class,
+            com.manorrock.beehive.cli.maven.MavenCommand.class,
+            com.manorrock.beehive.cli.java.JavaCommand.class
         },
         versionProvider = CliVersionProvider.class)
 public class Cli {
