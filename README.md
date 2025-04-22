@@ -13,7 +13,7 @@ This project is part of the Manorrock Sustainability Initiative. We are seeking 
 
 ### Interested in Maintaining This Project?
 
-If you're interested in becoming a maintainer, please see [this GitHub issue](https://github.com/manorrock/beehive/issues/84) for details on how to express your interest and what's involved. Note that new maintainers will need to migrate the project to a new namespace, as the Manorrock branding will remain with Manorrock.com.
+If you're interested in becoming a maintainer, please see [this GitHub issue](https://github.com/manorrock/bengal/issues/96) for details on how to express your interest and what's involved. Note that new maintainers will need to migrate the project to a new namespace, as the Manorrock branding will remain with Manorrock.com.
 
 **After December 31, 2025**: If this project moves to the manorrock-attic, GitHub issues will no longer be available. If you become interested in maintaining this project after it's archived, please email info@manorrock.com with the subject "Revival Request: [Project Name]".
 
